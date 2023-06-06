@@ -14,5 +14,23 @@
     "lodash": "^4.16.2",
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3"
-  }
+  },
+  "name": "ornatus",
+  "description": "<p align=\"center\"><img src=\"https://laravel.com/assets/img/components/logo-laravel.svg\"></p>",
+  "version": "1.0.0",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felixbahia/ornatus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felixbahia/ornatus/issues"
+  },
+  "homepage": "https://github.com/felixbahia/ornatus#readme"
 }

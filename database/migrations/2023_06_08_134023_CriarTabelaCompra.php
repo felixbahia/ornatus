@@ -17,9 +17,11 @@ class CriarTabelaCompra extends Migration
             $table->increments('id');
             $table->integer('produto_id')->unsigned();
             $table->integer('quantidade');
-            $table->float('valor_real');
-            $table->float('valor_dolar');
+            $table->float('valor_unitario_real');
+            $table->float('valor_unitario_dolar')->nullable();
             $table->date('data_compra');
+            $table->float('valor_total_real');
+            $table->float('valor_total_dolar')->nullable();
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->integer('deleted_by')->unsigned()->nullable();

@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Categoria;
+use App\Compra;
 use App\Preco;
 use App\Produto;
+use App\User;
+use App\UserPerfil;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Keygen\Keygen;
 
 class HomeController extends Controller
 {
@@ -28,22 +34,133 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function inserirDados(){
+    public function inserirDados(){    
+
+        /*$userPerfil = new UserPerfil;
+        $userPerfil->descricao = 'Administrador';
+        $userPerfil->created_by = 1;
+        $userPerfil->save();
+        $userPerfil = new UserPerfil;
+        $userPerfil->descricao = 'Cliente';
+        $userPerfil->created_by = 1;
+        $userPerfil->save();
+
+        $user = new User;
+        $user->name = 'Danilo2';
+        $user->email = 'danilofelixbahia2@gmail.com';
+        $user->password = '$2y$10$IZzydxfV3ui5bnka8ATLte8zRjzbmXpZ9v14Ko5XWwcCHWyvwcM5O';
+        $user->users_perfis_id = 1;
+        $user->save();
+        $user = new User;
+        $user->name = 'João2';
+        $user->email = 'danilofelixbahia2@hotmail.com';
+        $user->password = '$2y$10$IZzydxfV3ui5bnka8ATLte8zRjzbmXpZ9v14Ko5XWwcCHWyvwcM5O';
+        $user->users_perfis_id = 2;
+        $user->save();
+
+        $categoria = new Categoria;
+        $categoria->descricao = 'Brincos';
+        $categoria->created_by = 1;
+        $categoria->save();
+        $categoria = new Categoria;
+        $categoria->descricao = 'Anéis';
+        $categoria->created_by = 1;
+        $categoria->save();
+        $categoria = new Categoria;
+        $categoria->descricao = 'Colares';
+        $categoria->created_by = 1;
+        $categoria->save();
+        $categoria = new Categoria;
+        $categoria->descricao = 'Pulseiras';
+        $categoria->created_by = 1;
+        $categoria->save();
+
         $produtos = new Produto;
-        $produtos->codigo = 'VJ8756';
-        $produtos->descricao = 'Aliança de Ouro Classic';
+        $produtos->categoria_id = 1;
+        $produtos->codigo = Keygen::alphanum(4)->generate();
+        $produtos->descricao = 'Brinco Ouro 18k Argola Redonda C/Coração Verde 0.70 gramas';
+        $produtos->foto = 'foto/brinco.jpg';
+        $produtos->created_by = 1;
+        $produtos->save();
+        $produtos = new Produto;
+        $produtos->categoria_id = 2;
+        $produtos->codigo = Keygen::alphanum(4)->generate();
+        $produtos->descricao = 'Alianças Casamento Linha Classic Ouro 5mm Abaulada Polida';
         $produtos->foto = 'foto/alianca.jpg';
         $produtos->created_by = 1;
         $produtos->save();
+        $produtos = new Produto;
+        $produtos->categoria_id = 3;
+        $produtos->codigo = Keygen::alphanum(4)->generate();
+        $produtos->descricao = 'Colar Encanto Azul em Prata 925 Esterlina 45cm';
+        $produtos->foto = 'foto/colar.jpg';
+        $produtos->created_by = 1;
+        $produtos->save();
+        $produtos = new Produto;
+        $produtos->categoria_id = 4;
+        $produtos->codigo = Keygen::alphanum(4)->generate();
+        $produtos->descricao = 'Pulseira Life Infinito Prata';
+        $produtos->foto = 'foto/pulseira.jpg';
+        $produtos->created_by = 1;
+        $produtos->save();
 
+        $compra = new Compra;
+        $compra->produto_id = 1;
+        $compra->quantidade = 10;
+        $compra->valor_unitario_real = 292;
+        $compra->valor_total_real = 292 * 10;
+        $compra->data_compra = Carbon::now();
+        $compra->created_by = 1;
+        $compra->save();
+        $compra = new Compra;
+        $compra->produto_id = 2;
+        $compra->quantidade = 25;
+        $compra->valor_unitario_real = 2050.92;
+        $compra->valor_total_real = 2050.92 * 25;
+        $compra->data_compra = Carbon::now();
+        $compra->created_by = 1;
+        $compra->save();
+        $compra = new Compra;
+        $compra->produto_id = 3;
+        $compra->quantidade = 15;
+        $compra->valor_unitario_real = 75.92;
+        $compra->data_compra = Carbon::now();
+        $compra->valor_total_real = 75.92 * 15;
+        $compra->created_by = 1;
+        $compra->save();
+        $compra = new Compra;
+        $compra->produto_id = 4;
+        $compra->quantidade = 30;
+        $compra->valor_unitario_real = 160.92;
+        $compra->valor_total_real = 160.92 * 30;
+        $compra->data_compra = Carbon::now();
+        $compra->created_by = 1;
+        $compra->save();
+       
         $preco = new Preco;
-        $preco->produto_id = $produtos->id;
-        $preco->dolar = 2045.92; 
-        $preco->real = 4045.92;
-        $preco->custo_real = 2000.92;
-        $preco->custo_dolar = 1000.92;
+        $preco->produto_id = 1;
+        $preco->compra_id = 1;
+        $preco->real = 292;
         $preco->created_by = 1;
         $preco->save();
-
+        $preco = new Preco;
+        $preco->produto_id = 2;
+        $preco->compra_id = 2;
+        $preco->real = 4045.92;
+        $preco->created_by = 1;
+        $preco->save();
+        $preco = new Preco;
+        $preco->produto_id = 3;
+        $preco->compra_id = 3;
+        $preco->real = 169.60;
+        $preco->created_by = 1;
+        $preco->save();
+        $preco = new Preco;
+        $preco->produto_id = 4;
+        $preco->compra_id = 4;
+        $preco->real = 343;
+        $preco->created_by = 1;
+        $preco->save();
+        */
     }
 }

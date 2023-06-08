@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Compra extends Model
+class UserPerfil extends Model
 {
     use SoftDeletes;
     /**
@@ -15,8 +15,9 @@ class Compra extends Model
      */
 
     protected $connection = 'mysql';
+    protected $table = 'users_perfis';
     protected $fillable = [
-        'id', 'produto_id', 'quantidade', 'valor_unitario_real', 'valor_unitario_dolar', 'data_compra', 'valor_total_real', 'valor_total_dolar','created_by', 'updated_by', 'deleted_by'
+        'id', 'descricao', 'created_by', 'updated_by', 'deleted_by'
     ];
 
     /**
@@ -34,8 +35,5 @@ class Compra extends Model
     }
     public function deletedBy(){
         return $this->hasOne('App\User', 'id', 'deleted_by');
-    }
-    public function produto(){
-        return $this->hasOne('App\Produto', 'id', 'produto_id');
     }
 }

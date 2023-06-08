@@ -15,7 +15,7 @@ class Preco extends Model
 
     protected $connection = 'mysql';
     protected $fillable = [
-        'id', 'produto_id', 'real', 'dolar', 'custo_real', 'custo_dolar', 'created_by', 'updated_by', 'deleted_by'
+        'id', 'produto_id', 'compra_id', 'real', 'dolar', 'created_by', 'updated_by', 'deleted_by'
     ];
 
     /**
@@ -26,15 +26,18 @@ class Preco extends Model
     protected $dates = ['deleted_at'];
 
     public function createdBy(){
-        return $this->hasOne('inserir:dados\User', 'id', 'created_by');
+        return $this->hasOne('App\User', 'id', 'created_by');
     }
     public function updatedBy(){
-        return $this->hasOne('inserir:dados\User', 'id', 'updated_by');
+        return $this->hasOne('App\User', 'id', 'updated_by');
     }
     public function deletedBy(){
-        return $this->hasOne('inserir:dados\User', 'id', 'deleted_by');
+        return $this->hasOne('App\User', 'id', 'deleted_by');
     }
     public function produto(){
-        return $this->hasOne('inserir:dados\Produto', 'id', 'produto_id');
+        return $this->hasOne('App\Produto', 'id', 'produto_id');
+    }
+    public function compra(){
+        return $this->hasMany('App\Compra', 'id', 'produto_id');
     }
 }

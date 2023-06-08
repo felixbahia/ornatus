@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Produto extends Model
+class Compra extends Model
 {
     use SoftDeletes;
     /**
@@ -16,7 +16,7 @@ class Produto extends Model
 
     protected $connection = 'mysql';
     protected $fillable = [
-        'id', 'categoria_id', 'codigo', 'descricao', 'foto', 'created_by', 'updated_by', 'deleted_by'
+        'id', 'produto_id', 'valor_real', 'valor_dolar', 'data_compra', 'created_by', 'updated_by', 'deleted_by'
     ];
 
     /**
@@ -26,7 +26,6 @@ class Produto extends Model
      */
     protected $dates = ['deleted_at'];
 
-    
     public function createdBy(){
         return $this->hasOne('App\User', 'id', 'created_by');
     }
@@ -36,7 +35,7 @@ class Produto extends Model
     public function deletedBy(){
         return $this->hasOne('App\User', 'id', 'deleted_by');
     }
-    public function categoria(){
-        return $this->hasOne('App\User', 'id', 'categoria_id');
+    public function produto(){
+        return $this->hasOne('App\Produto', 'id', 'produto_id');
     }
 }

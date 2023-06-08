@@ -16,16 +16,19 @@ class CriarTabelaPrecos extends Migration
         Schema::create('precos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('produto_id')->unsigned();
+            $table->integer('compra_id')->unsigned();
             $table->float('dolar');
             $table->float('real');
-            $table->float('custo_real');
-            $table->float('custo_dolar');
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->integer('deleted_by')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('compra_id')
+                ->references('id')
+                ->on('compras')
+                ->onDelete('NO ACTION');
             $table->foreign('produto_id')
                 ->references('id')
                 ->on('produtos')

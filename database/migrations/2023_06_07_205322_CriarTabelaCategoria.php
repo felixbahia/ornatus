@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CriarTabelaProdutos extends Migration
+class CriarTabelaCategoria extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CriarTabelaProdutos extends Migration
      */
     public function up()
     {
-        Schema::create('produtos', function (Blueprint $table) {
+        Schema::create('categorias', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('codigo');
             $table->string('descricao');
-            $table->string('foto');
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->integer('deleted_by')->unsigned()->nullable();
@@ -36,7 +34,6 @@ class CriarTabelaProdutos extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('NO ACTION');
-
         });
     }
 
@@ -47,6 +44,6 @@ class CriarTabelaProdutos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produtos');
+        Schema::dropIfExists('categoria');
     }
 }

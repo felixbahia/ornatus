@@ -39,4 +39,10 @@ class Produto extends Model
     public function categoria(){
         return $this->hasOne('App\User', 'id', 'categoria_id');
     }
+    public function estoque(){
+        return $this->hasOne('App\Estoque', 'produto_id', 'id');
+    }
+    public function preco(){
+        return $this->hasOne('App\Preco', 'produto_id', 'id');
+    }
 }

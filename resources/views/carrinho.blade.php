@@ -37,28 +37,32 @@
                                         @endforeach
                                     </tbody> 
                                 </table>
-                                <div class="row">
-                                    <div class="col-md-3 col-md-offset-3"></div>
-                                    <div class="col-md-3 col-md-offset-3"><b>{{ $valor_total }}</b></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3 col-md-offset-3"><b>Frete</b></div>
-                                    <div class="col-md-3 col-md-offset-3"><b>{{ $frete }}</b></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3 col-md-offset-3"><b>Total</b></div>
-                                    <div class="col-md-3 col-md-offset-3"><b>{{ $total }}</b></div>
-                                </div>
-                                <div class="row">
-                                    <p>
-                                        <div class="col-md-4 col-md-offset-9">
-                                            <form enctype="multipart/form-data" name="itens" action="{{route('carrinho.finalizar')}}" method="POST">
-                                                <button type="submit" name="finalizar" class="btn btn-success">Finalizar Compra</button>
-                                            </form>
-                                        </div>
-                                    </p>
-                                </div>
-                           
+                                <form enctype="multipart/form-data" name="itens" action="{{route('gerar.pedido')}}" method="POST">
+                                    {{ csrf_field() }}
+                                    <div class="row">
+                                        <div class="col-md-3 col-md-offset-3"></div>
+                                        <input type="hidden" id="valor_total" name="valor_total" value="{{ $valor_total_sql }}">
+                                        <div class="col-md-3 col-md-offset-3"><b>{{ $valor_total }}</b></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 col-md-offset-3"><b>Frete</b></div>
+                                        <input type="hidden" id="frete" name="frete" value="{{ $frete_sql }}">
+                                        <div class="col-md-3 col-md-offset-3"><b>{{ $frete }}</b></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 col-md-offset-3"><b>Total</b></div>
+                                        <input type="hidden" id="total" name="total" value="{{ $total_sql }}">
+                                        <div class="col-md-3 col-md-offset-3"><b>{{ $total }}</b></div>
+                                    </div>
+                                    <div class="row">
+                                        <p>
+                                            <div class="col-md-4 col-md-offset-9">
+                                                    <button type="submit" name="finalizar" class="btn btn-success">Finalizar Compra</button>
+                                                </form>
+                                            </div>
+                                        </p>
+                                    </div>
+                                </form>
                         @else
                             <h3>O seu carrinho esta vazio</h3>
                         @endif

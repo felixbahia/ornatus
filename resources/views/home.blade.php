@@ -13,6 +13,14 @@
         <!-- Styles -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <link href="/css/style.css" rel="stylesheet"> 
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+         <!-- Scripts -->
+        <script>
+            window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+            ]); ?>
+        </script>
     </head>
     <body>
     <div class="container">
@@ -38,8 +46,11 @@
                                 <p>
                                     <span>{{ $produto['preco'] }}</span>
                                 </p>
-                                
-                                    <button type="button" class="btn btn-dark">Comprar</button>
+                                    <form enctype="multipart/form-data" name="produtos" action="{{route('carrinho.adicionar')}}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" id="codigo" name="codigo" value="{{ $produto['codigo'] }}">
+                                        <button type="submit" class="btn btn-dark">Comprar</button>
+                                    </form>
                                 </p>
                             </div>
                         </div>

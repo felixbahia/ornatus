@@ -22,4 +22,5 @@ Route::get('/home', 'HomeController@index');
 Route::post('/adicionar', 'PedidoController@adicionarCarrinho')->name('carrinho.adicionar');
 Route::get('/visualizar', 'PedidoController@visualizarCarrinho')->name('carrinho.visualizar');
 Route::post('/excluir', 'PedidoController@excluirCarrinho')->name('carrinho.excluir');
-Route::post('/finalizar', 'PedidoController@finalizarCarrinho')->name('carrinho.finalizar');
+Route::post('/gerar', 'PedidoController@gerarPedido')->name('gerar.pedido');
+Route::get('/pedido', 'PedidoController@visualizarPedido')->name('visualizar.pedido');

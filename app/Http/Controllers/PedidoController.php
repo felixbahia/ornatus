@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Carrinho;
+use App\DadosCliente;
+use App\Pedido;
+use App\PedidoItem;
 use App\Produto;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use SimpleXMLElement;
+use Keygen\Keygen;
 
 class PedidoController extends Controller
 {
@@ -26,14 +30,6 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
-     protected function validator(array $data)
-     {
-         return Validator::make($data, [
-             'quantidade' => 'required|numeric'
-         ]);
-     }
      
 
      public function adicionarCarrinho(Request $request){
@@ -88,7 +84,10 @@ class PedidoController extends Controller
             'itens' => $itens,
             'frete' => $frete,
             'valor_total' => $home->parserValor($valor_total),
-            'total' => $home->parserValor($total)
+            'total' => $home->parserValor($total),
+            'valor_total_sql' => $valor_total,
+            'total_sql' => $total,
+            'frete_sql' => 14.50
         ]);
      }
 
@@ -103,7 +102,67 @@ class PedidoController extends Controller
         return redirect('visualizar');
      }
 
-     public function finalizarCarrinho(Request $request){
+     public function gerarPedido(Request $request){
+        $campo = $request->only('frete', 'valor_total', 'total');
 
+        $carrinhoQuery = Carrinho::with(['produto', 'produto.preco'])
+            ->where('created_by', Auth::id())
+            ->where('finalizado', false)
+            ->get();
+
+        $cliente = DadosCliente::where('created_by', Auth::id())->first();
+        
+        $pedido =  new Pedido;
+        $pedido->cliente_id = $cliente->id;
+        $pedido->numero = Keygen::numeric(8)->generate();
+        $pedido->valor_total_produtos = $campo['valor_total'];
+        $pedido->frete = $campo['frete'];
+        $pedido->valor_total = $campo['total'];
+        $pedido->status_id = 1;
+        $pedido->created_by = Auth::id();
+        $pedido->save();
+
+        foreach($carrinhoQuery as $item){
+            $pedidoItem = new PedidoItem;
+            $pedidoItem->pedido_id = $pedido->id;
+            $pedidoItem->produto_id = $item->produto->id;
+            $pedidoItem->carrinho_id = $item->id;
+            $pedidoItem->valor = $item->produto->preco->real * $item->quantidade;
+            $pedidoItem->created_by = Auth::id();
+            $pedidoItem->save();
+
+            $item->finalizado = true;
+            $item->updated_by = Auth::id();
+            $item->save();
+        }
+
+        return redirect('pedido');
+     }
+
+     public function visualizarPedido(Request $request){
+        $pedidoQuery = Pedido::with(['pedidoItem', 'pedidoItem.produto', 'pedidoItem.produto.preco','pedidoItem.carrinho'])
+        ->where('created_by', Auth::id())
+        ->get();
+
+        $Itens = [];
+        $pedidos = [];
+
+        foreach($pedidoQuery as $pedido){
+            $pedidos[] = [
+                'numero' => $pedido->numero,
+                'status' => $pedido->status->descricao,
+            ];
+
+            foreach($pedido->pedidoItem as $item){
+                $Itens[] =[
+                    'codigo' => $item->produto->codigo,
+                    'descricao' => $item->produto->descricao,
+                    'quantidade' => $item->carrinho->quantidade,
+                    'valor' => $item->valor
+                ];
+            }
+        } 
+
+        return view('pedido')->with(['itens' => $Itens, 'pedidos' => $pedidos]);
      }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Categoria;
 use App\Compra;
+use App\DadosCliente;
 use App\Estoque;
+use App\PedidoStatus;
 use App\Preco;
 use App\Produto;
 use App\User;
@@ -190,6 +192,27 @@ class HomeController extends Controller
         $preco->quantidade = 30;
         $preco->created_by = 1;
         $preco->save();
+
+        $cliente = new DadosCliente;
+        $cliente->nome = 'João';
+        $cliente->cpf = '671.253.660-07';
+        $cliente->telefone = '(11) 99426-4264';
+        $cliente->data_nascimento = '1989-01-19';
+        $cliente->created_by = 2;
+        $cliente->save();
+
+        $status = new PedidoStatus;
+        $status->descricao = 'Aguardando Pagamento';
+        $status->created_by = 1;
+        $status->save();
+        $status = new PedidoStatus;
+        $status->descricao = 'Pago';
+        $status->created_by = 1;
+        $status->save();
+        $status = new PedidoStatus;
+        $status->descricao = 'Entregue';
+        $status->created_by = 1;
+        $status->save();
         */
     }
 }

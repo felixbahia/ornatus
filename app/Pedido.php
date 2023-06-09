@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class DadosCliente extends Model
+class Pedido extends Model
 {
     use SoftDeletes;
     /**
@@ -16,7 +16,7 @@ class DadosCliente extends Model
 
     protected $connection = 'mysql';
     protected $fillable = [
-        'id', 'nome', 'cpf', 'telefone', 'data_nascimento', 'created_by', 'updated_by', 'deleted_by'
+        'id', 'numero', 'cliente_id', 'valor_total_produtos', 'frete', 'valor_total', 'status_id', 'created_by', 'updated_by', 'deleted_by'
     ];
 
     /**
@@ -36,6 +36,12 @@ class DadosCliente extends Model
         return $this->hasOne('App\User', 'id', 'deleted_by');
     }
     public function cliente(){
-        return $this->hasOne('App\Cliente', 'id', 'created_by');
+        return $this->hasOne('App\DadosCliente', 'id', 'cliente_id');
+    }
+    public function pedidoItem(){
+        return $this->hasMany('App\PedidoItem', 'pedido_id', 'id');
+    }
+    public function status(){
+        return $this->hasOne('App\PedidoStatus', 'id', 'status_id');
     }
 }

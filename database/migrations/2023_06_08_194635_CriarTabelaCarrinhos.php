@@ -16,7 +16,7 @@ class CriarTabelaCarrinhos extends Migration
         Schema::create('carrinhos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('produto_id')->unsigned();
-            $table->integer('quantidade');
+            $table->integer('quantidade')->default(1);
             $table->boolean('finalizado')->default(false);
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned()->nullable();

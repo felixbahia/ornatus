@@ -18,20 +18,26 @@
                                             <th>Descrição</th>
                                             <th>Quantidade</th>
                                             <th>Valor</th>
-                                            <th>Status</th>
                                         </thr>
                                     </thead>
                                     <tbody>
-                                        @foreach($itens as $item)
+                                        @foreach($pedido['itens'] as $item)
                                             <tr>
                                                 <td>{{ $item['codigo'] }}</td>
                                                 <td>{{ $item['descricao'] }}</td>
                                                 <td>{{ $item['quantidade'] }}</td>
                                                 <td>{{ $item['valor'] }}</td>
-                                                <td></td>
                                             </tr>
                                         @endforeach
-                                    </tbody> 
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Total</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th>{{ $pedido['total'] }}</th>
+                                        </tr>
+                                    </tfoot> 
                                 </table>
                             @endforeach
                         @else

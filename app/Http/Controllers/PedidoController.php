@@ -144,25 +144,26 @@ class PedidoController extends Controller
         ->where('created_by', Auth::id())
         ->get();
 
-        $Itens = [];
         $pedidos = [];
+        $home = new HomeController;
 
         foreach($pedidoQuery as $pedido){
-            $pedidos[] = [
+            $pedidos[$pedido->id] = [
                 'numero' => $pedido->numero,
                 'status' => $pedido->status->descricao,
+                'total' => $home->parserValor($pedido->valor_total)
             ];
 
             foreach($pedido->pedidoItem as $item){
-                $Itens[] =[
+                $pedidos[$item->pedido_id]['itens'][] = [
                     'codigo' => $item->produto->codigo,
                     'descricao' => $item->produto->descricao,
                     'quantidade' => $item->carrinho->quantidade,
-                    'valor' => $item->valor
+                    'valor' => $home->parserValor($item->valor)
                 ];
             }
         } 
 
-        return view('pedido')->with(['itens' => $Itens, 'pedidos' => $pedidos]);
+        return view('pedido')->with(['pedidos' => $pedidos]);
      }
 }

@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\InsercaoDeDados::class,
+        Commands\VerificarPagamento::class,
+        Commands\VerificarEntrega::class,
     ];
 
     /**

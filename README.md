@@ -1,40 +1,84 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
 
-## About Laravel
+## Instalação do projeto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+Primeiro faça o git clone do projeto. 
+<!--sec data-title="Your first command: OS X and Linux" data-id="OSX_Linux_whoami" data-collapse=true ces-->
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    git clone https://github.com/felixbahia/ornatus.git
+    
+<!--endsec-->
+Execute o composer
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+<!--sec data-title="Your first command: OS X and Linux" data-id="OSX_Linux_whoami" data-collapse=true ces-->
 
-## Learning Laravel
+    composer update
+    
+<!--endsec-->
+Encontre o arquvo vendor\symfony\polyfill-php72\Php72.php e faça a seguinte alteração na linha 86. 
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+<!--sec data-title="Your first command: OS X and Linux" data-id="OSX_Linux_whoami" data-collapse=true ces-->
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+    return $map[\PHP_OS] ?? 'Unknown';
+    
+<!--endsec-->
+Altere para:
 
-## Contributing
+<!--sec data-title="Your first command: OS X and Linux" data-id="OSX_Linux_whoami" data-collapse=true ces-->
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+    return $map[\PHP_OS] ? $map[\PHP_OS] : 'Unknown';
+    
+<!--endsec-->
+Neste mesmo arquivo faça a seguinte alteração na linha 185.
 
-## Security Vulnerabilities
+<!--sec data-title="Your first command: OS X and Linux" data-id="OSX_Linux_whoami" data-collapse=true ces-->
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+    'UTF-8' !== $encoding = $encoding ?? mb_internal_encoding()
+    
+<!--endsec-->
+Alter para:
 
-## License
+<!--sec data-title="Your first command: OS X and Linux" data-id="OSX_Linux_whoami" data-collapse=true ces-->
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+    'UTF-8' !== $encoding = $encoding ? : mb_internal_encoding()
+    
+<!--endsec-->
+
+## Alimentar a base
+
+Ajuste o arquivo .env para conexão de seu banco e rode estes comandos nos seu projeto
+<!--sec data-title="Your first command: OS X and Linux" data-id="OSX_Linux_whoami" data-collapse=true ces-->
+
+    php artisan key:generate
+    php artisan migrate
+    php artisan inserir:dados
+    
+<!--endsec-->
+
+
+## Comprar
+
+Pare realizar uma compra é necessário, primeiramente, logar com o seguinte usuário
+<!--sec data-title="Your first command: OS X and Linux" data-id="OSX_Linux_whoami" data-collapse=true ces-->
+
+    Login: danilofelixbahia@hotmail.com
+    Senha: Ornatus@2023
+    
+<!--endsec-->
+
+  
+
+## Atualizar pedido
+
+Para atualizar o status do pedido rode os comandos nos seu projeto
+<!--sec data-title="Your first command: OS X and Linux" data-id="OSX_Linux_whoami" data-collapse=true ces-->
+
+    php artisan verificar:pagamento
+    php artisan verificar:entrega
+    
+<!--endsec-->
+
+
+## Licença
+
+O software de código aberto licenciado pelo o autor Danilo Bahia

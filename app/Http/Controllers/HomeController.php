@@ -6,6 +6,7 @@ use App\Categoria;
 use App\Compra;
 use App\DadosCliente;
 use App\Estoque;
+use App\Pedido;
 use App\PedidoStatus;
 use App\Preco;
 use App\Produto;
@@ -214,5 +215,33 @@ class HomeController extends Controller
         $status->created_by = 1;
         $status->save();
         */
+    }
+
+    public function verificarPagamento(){
+       
+        $pedidos = Pedido::with(['pedidoItem.produto.estoque', 'pedidoItem', 'pedidoItem.carrinho'])->where('status_id', 1)->get();
+
+        foreach($pedidos as $pedido){
+            $pedido->status_id = 2;
+            $pedido->updated_by = 1;
+            $pedido->save();
+
+            foreach($pedido->pedidoItem as $item){
+                $item->produto->estoque->quantidade -= $item->carrinho->quantidade;
+                $item->produto->estoque->updated_by = 1;
+                $item->produto->estoque->save();
+            }
+        }
+    }
+
+    public function verificarEntrega(){
+       
+        $pedidos = Pedido::where('status_id', 2)->get();
+
+        foreach($pedidos as $pedido){
+            $pedido->status_id = 3;
+            $pedido->updated_by = 1;
+            $pedido->save();
+        }
     }
 }

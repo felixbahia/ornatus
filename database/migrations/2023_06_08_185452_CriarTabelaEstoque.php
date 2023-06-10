@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CriarTabelaCarrinho extends Migration
+class CriarTabelaEstoque extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CriarTabelaCarrinho extends Migration
      */
     public function up()
     {
-        Schema::create('carrinhos', function (Blueprint $table) {
+        Schema::create('estoques', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('produto_id')->unsigned();
             $table->integer('quantidade');
-            $table->boolean('finalizado')->default(false);
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->integer('deleted_by')->unsigned()->nullable();
@@ -40,9 +39,9 @@ class CriarTabelaCarrinho extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('NO ACTION');
-
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -50,6 +49,6 @@ class CriarTabelaCarrinho extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carrinhos');
+        Schema::dropIfExists('estoques');
     }
 }

@@ -20,17 +20,12 @@ class CriarTabelaPedido extends Migration
             $table->float('valor_total_produtos');
             $table->float('frete');
             $table->float('valor_total');
-            $table->integer('status_id')->unsigned();
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->integer('deleted_by')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('status_id')
-                ->references('id')
-                ->on('pedido_status')
-                ->onDelete('NO ACTION');
             $table->foreign('cliente_id')
                 ->references('id')
                 ->on('dados_clientes')

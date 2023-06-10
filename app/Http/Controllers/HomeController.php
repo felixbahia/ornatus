@@ -47,6 +47,17 @@ class HomeController extends Controller
 
     public function inserirDados(){    
 
+        $user = new User;
+        $user->name = 'Danilo';
+        $user->email = 'danilofelixbahia@gmail.com';
+        $user->password = '$2y$10$IZzydxfV3ui5bnka8ATLte8zRjzbmXpZ9v14Ko5XWwcCHWyvwcM5O';
+        $user->save();
+        $user = new User;
+        $user->name = 'João';
+        $user->email = 'danilofelixbahia@hotmail.com';
+        $user->password = '$2y$10$IZzydxfV3ui5bnka8ATLte8zRjzbmXpZ9v14Ko5XWwcCHWyvwcM5O';
+        $user->save();
+
         $userPerfil = new UserPerfil;
         $userPerfil->descricao = 'Administrador';
         $userPerfil->created_by = 1;
@@ -56,18 +67,12 @@ class HomeController extends Controller
         $userPerfil->created_by = 1;
         $userPerfil->save();
 
-        $user = new User;
-        $user->name = 'Danilo';
-        $user->email = 'danilofelixbahia@gmail.com';
-        $user->password = '$2y$10$IZzydxfV3ui5bnka8ATLte8zRjzbmXpZ9v14Ko5XWwcCHWyvwcM5O';
-        $user->users_perfis_id = 1;
-        $user->save();
-        $user = new User;
-        $user->name = 'João';
-        $user->email = 'danilofelixbahia@hotmail.com';
-        $user->password = '$2y$10$IZzydxfV3ui5bnka8ATLte8zRjzbmXpZ9v14Ko5XWwcCHWyvwcM5O';
-        $user->users_perfis_id = 2;
-        $user->save();
+        $userUpdate = User::where('email','danilofelixbahia@gmail.com')->first();
+        $userUpdate->users_perfis_id = 1;
+        $userUpdate->save();
+        $userUpdate = User::where('email','danilofelixbahia@hotmail.com')->first();
+        $userUpdate->users_perfis_id = 2;
+        $userUpdate->save();
 
         $categoria = new Categoria;
         $categoria->descricao = 'Brincos';

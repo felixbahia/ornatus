@@ -1,6 +1,9 @@
 
 
-## Instalação do projeto PHP 5.6 MySql 5.7
+## Instalação do projeto
+
+Requisitos:
+PHP 5.6 MySql 5.7
 
 Primeiro faça o git clone do projeto. 
 <!--sec data-title="Your first command: OS X and Linux" data-id="OSX_Linux_whoami" data-collapse=true ces-->

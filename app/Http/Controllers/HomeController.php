@@ -47,7 +47,7 @@ class HomeController extends Controller
 
     public function inserirDados(){    
 
-        /*$userPerfil = new UserPerfil;
+        $userPerfil = new UserPerfil;
         $userPerfil->descricao = 'Administrador';
         $userPerfil->created_by = 1;
         $userPerfil->save();
@@ -57,14 +57,14 @@ class HomeController extends Controller
         $userPerfil->save();
 
         $user = new User;
-        $user->name = 'Danilo2';
-        $user->email = 'danilofelixbahia2@gmail.com';
+        $user->name = 'Danilo';
+        $user->email = 'danilofelixbahia@gmail.com';
         $user->password = '$2y$10$IZzydxfV3ui5bnka8ATLte8zRjzbmXpZ9v14Ko5XWwcCHWyvwcM5O';
         $user->users_perfis_id = 1;
         $user->save();
         $user = new User;
-        $user->name = 'João2';
-        $user->email = 'danilofelixbahia2@hotmail.com';
+        $user->name = 'João';
+        $user->email = 'danilofelixbahia@hotmail.com';
         $user->password = '$2y$10$IZzydxfV3ui5bnka8ATLte8zRjzbmXpZ9v14Ko5XWwcCHWyvwcM5O';
         $user->users_perfis_id = 2;
         $user->save();
@@ -214,7 +214,6 @@ class HomeController extends Controller
         $status->descricao = 'Entregue';
         $status->created_by = 1;
         $status->save();
-        */
     }
 
     public function verificarPagamento(){
